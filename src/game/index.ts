@@ -8,12 +8,12 @@ import { getPlayerName } from '../utils';
  * Main Game class that holds the core logic of the game.
  */
 export class Game {
-  private board: Disk[][] = [];
+  protected board: Disk[][] = [];
   private maxColumns = config.maxColumns;
   private maxRows = config.maxRows;
   private playerRed: BasePlayer;
   private playerYellow: BasePlayer;
-  private turn = Math.random() > 0.5 ? Disk.Red : Disk.Yellow;
+  protected turn = Math.random() > 0.5 ? Disk.Red : Disk.Yellow;
   private gameOver = false;
   private winner: BasePlayer | null = null;
 
@@ -22,19 +22,6 @@ export class Game {
    */
   private get playerTurn() {
     return this.turn === Disk.Red ? this.playerRed : this.playerYellow;
-  }
-
-  /**
-   * Lists all available columns.
-   */
-  private get availableColumns(): number[] {
-    return this.board.reduce(
-      (availableColumns, _column, columnIndex) =>
-        this.isValidMove(columnIndex)
-          ? [...availableColumns, columnIndex]
-          : availableColumns,
-      []
-    );
   }
 
   constructor(
@@ -84,7 +71,7 @@ export class Game {
   private async doTurn(): Promise<void> {
     // Print out current turn and available columns.
     this.printer.printCurrentTurn(this.playerTurn.name, this.turn);
-    this.printer.printAvailableColumns(this.availableColumns);
+    this.printer.printAvailableColumns(this.availableColumns(this.board));
 
     // Create a column variable.
     let column: number;
@@ -94,16 +81,21 @@ export class Game {
       // Move depending on the turn.
       switch (this.turn) {
         case Disk.Red:
-          column = await this.playerRed.move(this.availableColumns);
+          column = await this.playerRed.move(this.availableColumns(this.board));
           break;
         case Disk.Yellow:
-          column = await this.playerYellow.move(this.availableColumns);
+          column = await this.playerYellow.move(
+            this.availableColumns(this.board)
+          );
           break;
         default:
           column = -1;
           break;
       }
-    } while (!this.isValidMove(column));
+    } while (!this.isValidMove(column, this.board));
+
+    // Print the players choice.
+    this.printer.printPickedColumn(this.playerTurn.name, this.turn, column);
 
     // Update the board.
     this.throwInDisk(column);
@@ -127,14 +119,24 @@ export class Game {
   }
 
   /**
+   * Lists all available columns.
+   */
+  protected availableColumns(board: Disk[][]): number[] {
+    return board.reduce(
+      (availableColumns, _column, columnIndex) =>
+        this.isValidMove(columnIndex, board)
+          ? [...availableColumns, columnIndex]
+          : availableColumns,
+      []
+    );
+  }
+
+  /**
    * Updates the board.
    */
-  private throwInDisk(column: number): void {
+  protected throwInDisk(column: number): void {
     // Find the index of the row to update.
     const row = this.board[column].findIndex(row => row === Disk.Empty);
-
-    // Print the players choice.
-    this.printer.printPickedColumn(this.playerTurn.name, this.turn, column);
 
     // Update the row.
     this.board[column][row] = this.turn;
@@ -143,15 +145,13 @@ export class Game {
   /**
    * Checks if the chosen column is valid.
    */
-  private isValidMove(column: number): boolean {
+  private isValidMove(column: number, board: Disk[][]): boolean {
     // Check the if the number is in the column range.
     if (column < 0 || column > this.maxColumns) {
       return false;
     } else {
       // Check if the move is valid based on the board.
-      const isValid = this.board[column].some(row => row === Disk.Empty);
-
-      return isValid;
+      return board[column].some(row => row === Disk.Empty);
     }
   }
 
@@ -183,7 +183,7 @@ export class Game {
   /**
    * Resets the board.
    */
-  private resetBoard(): void {
+  protected resetBoard(): void {
     for (let column = 0; column < this.maxColumns; column++) {
       // Initialize each column.
       this.board[column] = [];
@@ -197,7 +197,7 @@ export class Game {
   /**
    * Checks if there is a winner.
    */
-  private checkWinner(board: Disk[][]): Disk {
+  protected checkWinner(board: Disk[][]): Disk {
     const width = board.length;
     const height = board[0].length;
 
