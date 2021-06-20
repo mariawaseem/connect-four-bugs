@@ -8,10 +8,14 @@ export class Game {
   private maxRows = config.maxRows;
   private maxColumns = config.maxColumns;
   private turn = Math.random() > 0.5 ? Disk.Red : Disk.Yellow;
-  private playerTurn =
-    this.turn === Disk.Red ? this.playerRed.name : this.playerYellow.name;
   private gameOver = false;
   private winner: BasePlayer | null = null;
+
+  private get playerTurn() {
+    return this.turn === Disk.Red
+      ? this.playerRed.name
+      : this.playerYellow.name;
+  }
 
   /**
    * Lists all available columns.

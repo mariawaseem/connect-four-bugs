@@ -26,7 +26,9 @@ export class BasicPrinter extends BasePrinter {
     console.log(`${playerName}' turn (${this.getDiskColor(disk)})`);
   }
 
-  public printAvailableColumns(columns: number[]): void {}
+  public printAvailableColumns(columns: number[]): void {
+    console.log(`Available columns: ${columns}`);
+  }
 
   public printWinner(playerName: string, disk: Disk) {
     console.log(`${playerName} (${this.getDiskColor(disk)}) is a winner!`);
