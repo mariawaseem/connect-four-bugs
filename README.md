@@ -11,11 +11,11 @@ Three game modes available:
 To start the game, run command:
 
 ```bash
- # npm run dev
+ npm run dev
 ```
 
 or
 
 ```bash
-# npm run build && npm run start
+npm run build && npm run start
 ```
