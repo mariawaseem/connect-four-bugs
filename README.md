@@ -19,3 +19,9 @@ or
 ```bash
 npm run build && npm run start
 ```
+
+To run tests, run command:
+
+```bash
+npm run test
+```
