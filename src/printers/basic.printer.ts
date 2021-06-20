@@ -2,6 +2,9 @@ import { BasePrinter } from './';
 import { Disk } from '../types';
 
 export class BasicPrinter extends BasePrinter {
+  /**
+   * Prints a start screen.
+   */
   public printStartScreen(playerRed: string, playerYellow: string): void {
     console.log('Welcome to Connect4');
     console.log(`Player 1: ${playerRed} (${this.getDiskColor(Disk.Red)}) `);
@@ -10,6 +13,9 @@ export class BasicPrinter extends BasePrinter {
     );
   }
 
+  /**
+   * Prints current state of the game board.
+   */
   public printBoard(board: Disk[][]): void {
     // Print a new line.
     console.log();
@@ -22,14 +28,23 @@ export class BasicPrinter extends BasePrinter {
     console.log();
   }
 
+  /**
+   * Prints current player's turn.
+   */
   public printCurrentTurn(playerName: string, disk: Disk): void {
     console.log(`${playerName}' turn (${this.getDiskColor(disk)})`);
   }
 
+  /**
+   * Prints available columns.
+   */
   public printAvailableColumns(columns: number[]): void {
     console.log(`Available columns: ${columns}`);
   }
 
+  /**
+   * Prints columns picked by a player.
+   */
   public printPickedColumn(
     playerName: string,
     disk: Disk,
@@ -40,10 +55,16 @@ export class BasicPrinter extends BasePrinter {
     );
   }
 
+  /**
+   * Prints the winner.
+   */
   public printWinner(playerName: string, disk: Disk) {
     console.log(`${playerName} (${this.getDiskColor(disk)}) is a winner!`);
   }
 
+  /**
+   * Prints 'red' or 'yellow' based on the provided disk.
+   */
   private getDiskColor(disk: Disk): string {
     return disk === Disk.Red ? 'red' : 'yellow';
   }

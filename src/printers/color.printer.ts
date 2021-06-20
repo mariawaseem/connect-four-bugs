@@ -1,12 +1,15 @@
 import chalk from 'chalk';
 import { BasePrinter } from './';
-import { Disk } from '../types';
 import { transpose } from '../utils';
+import { Disk } from '../types';
 
 export class ColorPrinter extends BasePrinter {
+  /**
+   * Prints a start screen.
+   */
   public printStartScreen(playerRed: string, playerYellow: string): void {
     // Clear the console.
-    // console.clear();
+    console.clear();
 
     // Print welcome message.
     const gameName = `${chalk.yellow('Connect')} ${chalk.red(4)}`;
@@ -22,11 +25,12 @@ export class ColorPrinter extends BasePrinter {
     );
   }
 
+  /**
+   * Prints current state of the game board.
+   */
   public printBoard(board: Disk[][]): void {
     // Print a new line.
-    console.log('\n');
-    // // Print a message about the game state.
-    // console.log('Current state of the game:\n');
+    console.log();
 
     // Transpose and reverse the board to make it graphically readable.
     const transposedAndReversedBoard = transpose(board).reverse();
@@ -44,7 +48,7 @@ export class ColorPrinter extends BasePrinter {
             : disk === Disk.Yellow
             ? chalk.yellow(disk)
             : chalk.dim(disk);
-        // Print a colored
+        // Print a colored disk.
         process.stdout.write(` ${coloredDisk}`);
       });
 
@@ -56,31 +60,48 @@ export class ColorPrinter extends BasePrinter {
     console.log();
   }
 
+  /**
+   * Prints current player's turn.
+   */
   public printCurrentTurn(playerName: string, disk: Disk): void {
     console.log(`${this.colorName(playerName, disk)}'s turn`);
   }
 
+  /**
+   * Prints available columns.
+   */
   public printAvailableColumns(columns: number[]): void {
     console.log(`Available columns: ${columns.join(', ')}`);
   }
 
+  /**
+   * Prints columns picked by a player.
+   */
   public printPickedColumn(
     playerName: string,
     disk: Disk,
     column: number
   ): void {
-    // Log the players choice.
     console.log(
-      `${this.colorName(playerName, disk)} picks column number ${column}`
+      `${this.colorName(
+        playerName,
+        disk
+      )} inserts the disk into column ${column}`
     );
   }
 
+  /**
+   * Prints the winner.
+   */
   public printWinner(playerName: string, disk: Disk) {
     console.log(
-      `Congratulations! ${this.colorName(playerName, disk)} is a winner!`
+      `Congratulations! ${this.colorName(playerName, disk)} is a winner!\n`
     );
   }
 
+  /**
+   * Applies a color to the player name string based on the provided disk.
+   */
   private colorName(playerName: string, disk: Disk): string {
     return disk === Disk.Red ? chalk.red(playerName) : chalk.yellow(playerName);
   }

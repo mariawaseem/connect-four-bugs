@@ -1,8 +1,8 @@
-import { config } from '../config';
 import { BasePlayer } from '../players';
 import { BasePrinter } from '../printers';
-import { Disk, Mode } from '../types';
 import { getPlayerName } from '../utils';
+import { config } from '../config';
+import { Disk, Mode } from '../types';
 
 /**
  * Main Game class that holds the core logic of the game.
@@ -11,15 +11,11 @@ export class Game {
   protected board: Disk[][] = [];
   private maxColumns = config.maxColumns;
   private maxRows = config.maxRows;
+  protected turn = Math.random() > 0.5 ? Disk.Red : Disk.Yellow;
   private playerRed: BasePlayer;
   private playerYellow: BasePlayer;
-  protected turn = Math.random() > 0.5 ? Disk.Red : Disk.Yellow;
-  private gameOver = false;
   private winner: BasePlayer | null = null;
-
-  /**
-   * Current player turn.
-   */
+  private gameOver = false;
   private get playerTurn() {
     return this.turn === Disk.Red ? this.playerRed : this.playerYellow;
   }
@@ -68,29 +64,25 @@ export class Game {
     }
   }
 
+  /**
+   * Execute the turn.
+   */
   private async doTurn(): Promise<void> {
     // Print out current turn and available columns.
     this.printer.printCurrentTurn(this.playerTurn.name, this.turn);
     this.printer.printAvailableColumns(this.availableColumns(this.board));
 
     // Create a column variable.
+    const availableColumns = this.availableColumns(this.board);
     let column: number;
 
     // Make a move until it is valid.
     do {
       // Move depending on the turn.
-      switch (this.turn) {
-        case Disk.Red:
-          column = await this.playerRed.move(this.availableColumns(this.board));
-          break;
-        case Disk.Yellow:
-          column = await this.playerYellow.move(
-            this.availableColumns(this.board)
-          );
-          break;
-        default:
-          column = -1;
-          break;
+      if (this.turn === Disk.Red) {
+        column = await this.playerRed.move(availableColumns);
+      } else {
+        column = await this.playerYellow.move(availableColumns);
       }
     } while (!this.isValidMove(column, this.board));
 
@@ -98,7 +90,7 @@ export class Game {
     this.printer.printPickedColumn(this.playerTurn.name, this.turn, column);
 
     // Update the board.
-    this.throwInDisk(column);
+    this.insertDisk(column);
 
     // Display the board.
     this.printer.printBoard(this.board);
@@ -132,9 +124,9 @@ export class Game {
   }
 
   /**
-   * Updates the board.
+   * Inserts the disk into the board.
    */
-  protected throwInDisk(column: number): void {
+  protected insertDisk(column: number): void {
     // Find the index of the row to update.
     const row = this.board[column].findIndex(row => row === Disk.Empty);
 
@@ -208,7 +200,9 @@ export class Game {
         const player = board[c][r];
 
         // Don't check empty slots.
-        if (player === Disk.Empty) continue;
+        if (player === Disk.Empty) {
+          continue;
+        }
 
         if (
           r + 3 < height &&

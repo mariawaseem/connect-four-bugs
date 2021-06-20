@@ -1,13 +1,15 @@
 import { prompt, QuestionCollection } from 'inquirer';
 import { BasePlayer } from './';
-import { PlayerType } from '../types';
 import { config } from '../config';
-import { IColumnAnswer } from '../types';
+import { PlayerType, IColumnAnswer } from '../types';
 
 export class HumanPlayer extends BasePlayer {
   readonly type = PlayerType.Human;
   readonly name = 'Human Player';
 
+  /**
+   * Makes a move based on available columns.
+   */
   public async move(availableColumns: number[]): Promise<number> {
     // Prompt for a column number.
     const { column } = await prompt<IColumnAnswer>({

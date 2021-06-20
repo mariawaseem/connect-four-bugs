@@ -1,10 +1,13 @@
+import { BasePlayer } from './';
 import { PlayerType } from '../types';
-import { BasePlayer } from '.';
 
 export class DumbAIPlayer extends BasePlayer {
   readonly type = PlayerType.AI;
   readonly name = 'Dumb AI';
 
+  /**
+   * Makes a move based on available columns.
+   */
   public async move(availableColumns: number[]): Promise<number> {
     // Pick a random column.
     const randomIndex = Math.floor(Math.random() * availableColumns.length);

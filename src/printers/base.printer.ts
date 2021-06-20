@@ -1,5 +1,8 @@
 import { Disk } from '../types';
 
+/**
+ * Base class for every Printer to extend.
+ */
 export abstract class BasePrinter {
   abstract printStartScreen(playerRed: string, playerYellow: string): void;
   abstract printBoard(board: Disk[][]): void;

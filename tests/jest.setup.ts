@@ -25,8 +25,8 @@ class TestGame extends Game {
     return this.checkWinner(board);
   }
 
-  public _throwInDisk(column: number): void {
-    this.throwInDisk(column);
+  public _insertDisk(column: number): void {
+    this.insertDisk(column);
   }
 }
 

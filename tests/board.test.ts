@@ -65,7 +65,7 @@ describe('when creates a new board', () => {
 
   let pickedColumn = 3;
   describe(`and when a red disk is thrown into column ${pickedColumn}`, () => {
-    game._throwInDisk(pickedColumn);
+    game._insertDisk(pickedColumn);
     let updatedBoard = copyBoard(game._board);
 
     it('correctly updates the board', () => {

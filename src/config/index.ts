@@ -2,7 +2,7 @@ import { DistinctQuestion } from 'inquirer';
 import { Mode } from '../types';
 
 /**
- * Contains all the game settings.
+ * Config class that contains all the game settings.
  */
 class Config {
   /**
@@ -31,7 +31,7 @@ class Config {
   readonly columnNumberQuestion: DistinctQuestion = {
     name: 'column',
     type: 'list',
-    message: 'Throw disk into column',
+    message: 'Insert disk into column',
   };
 }
 
