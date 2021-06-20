@@ -30,6 +30,16 @@ export class BasicPrinter extends BasePrinter {
     console.log(`Available columns: ${columns}`);
   }
 
+  public printPickedColumn(
+    playerName: string,
+    disk: Disk,
+    column: number
+  ): void {
+    console.log(
+      `${playerName} (${this.getDiskColor(disk)}) picks column number ${column}`
+    );
+  }
+
   public printWinner(playerName: string, disk: Disk) {
     console.log(`${playerName} (${this.getDiskColor(disk)}) is a winner!`);
   }

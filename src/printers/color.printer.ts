@@ -6,12 +6,12 @@ import { transpose } from '../utils';
 export class ColorPrinter extends BasePrinter {
   public printStartScreen(playerRed: string, playerYellow: string): void {
     // Clear the console.
-    console.clear();
+    // console.clear();
 
     // Print welcome message.
     const gameName = `${chalk.yellow('Connect')} ${chalk.red(4)}`;
-    console.log(`Welcome to ${gameName}!`);
-    console.log(chalk.dim('Connect four disks in a row to win!\n'));
+    console.log(`\nWelcome to ${gameName}`);
+    console.log('Connect four disks to win!\n');
 
     // Print player names.
     console.log(
@@ -62,6 +62,17 @@ export class ColorPrinter extends BasePrinter {
 
   public printAvailableColumns(columns: number[]): void {
     console.log(`Available columns: ${columns.join(', ')}`);
+  }
+
+  public printPickedColumn(
+    playerName: string,
+    disk: Disk,
+    column: number
+  ): void {
+    // Log the players choice.
+    console.log(
+      `${this.colorName(playerName, disk)} picks column number ${column}`
+    );
   }
 
   public printWinner(playerName: string, disk: Disk) {

@@ -4,5 +4,5 @@ export abstract class BasePlayer {
   abstract type: PlayerType;
   abstract name: string;
 
-  abstract move(): Promise<number>;
+  abstract move(availableColumns: number[]): Promise<number>;
 }

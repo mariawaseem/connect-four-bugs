@@ -1,4 +1,4 @@
-import { prompt } from 'inquirer';
+import { prompt, QuestionCollection } from 'inquirer';
 import { BasePlayer } from './';
 import { PlayerType } from '../types';
 import { config } from '../config';
@@ -6,15 +6,14 @@ import { IColumnAnswer } from '../types';
 
 export class HumanPlayer extends BasePlayer {
   readonly type = PlayerType.Human;
+  readonly name = 'Human Player';
 
-  constructor(readonly name: string) {
-    super();
-  }
-
-  public async move(): Promise<number> {
+  public async move(availableColumns: number[]): Promise<number> {
     // Prompt for a column number.
-    const { column } = await prompt<IColumnAnswer>(config.columnNumberQuestion);
-
-    return +column;
+    const { column } = await prompt<IColumnAnswer>({
+      ...config.columnNumberQuestion,
+      choices: availableColumns.map(column => `${column}`),
+    } as QuestionCollection<IColumnAnswer>);
+    return column;
   }
 }

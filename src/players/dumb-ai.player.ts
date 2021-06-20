@@ -1,4 +1,3 @@
-import { config } from '../config';
 import { PlayerType } from '../types';
 import { BasePlayer } from '.';
 
@@ -6,9 +5,11 @@ export class DumbAIPlayer extends BasePlayer {
   readonly type = PlayerType.AI;
   readonly name = 'Dumb AI';
 
-  public async move(): Promise<number> {
+  public async move(availableColumns: number[]): Promise<number> {
     // Pick a random column.
-    const column = Math.floor(Math.random() * config.maxColumns);
+    const randomIndex = Math.floor(Math.random() * availableColumns.length);
+    const column = availableColumns[randomIndex];
+
     return new Promise((resolve, _reject) => resolve(column));
   }
 }
