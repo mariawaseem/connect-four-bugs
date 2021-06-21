@@ -1,12 +1,16 @@
 # Connect Four
 
-Text console-based Connect Four game. Connect four disk to win.
+## Description
 
-Three game modes available:
+Text console-based Connect Four game. First player to connect four disks of the same color wins. Disks can be connected horizontally, vertically or diagonally.
+
+There are three game modes available:
 
 - Human vs Human
 - Human vs AI
 - AI vs AI
+
+## Usage
 
 To start the game, run command:
 
@@ -14,13 +18,9 @@ To start the game, run command:
  npm run dev
 ```
 
-or
+## Tests
 
-```bash
-npm run build && npm run start
-```
-
-To run tests, run command:
+To execute tests, run command:
 
 ```bash
 npm run test
