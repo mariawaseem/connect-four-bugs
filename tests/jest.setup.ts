@@ -12,13 +12,11 @@ class TestGame extends Game {
   public _turn: Disk = this.turn;
 
   public _availableColumns(board: Disk[][]): number[] {
-    // console.log(this.board);
-    // console.log(this._board);
     return this.availableColumns(board);
   }
 
-  public _resetBoard(): void {
-    this.resetBoard();
+  public _createBoard(): Disk[][] {
+    return this.createBoard();
   }
 
   public _checkWinner(board: Disk[][]): Disk {

@@ -2,8 +2,6 @@ import { Disk } from '../src/types';
 import { copyBoard, game } from './jest.setup';
 
 describe('when creates a new board', () => {
-  // Generate a new board.
-  game._resetBoard();
   // Create a fresh copy.
   const board = copyBoard(game._board);
 
