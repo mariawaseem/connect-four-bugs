@@ -1,3 +1,4 @@
+import { config } from '../src/config';
 import { Disk } from '../src/types';
 import { copyBoard, game } from './jest.setup';
 
@@ -6,8 +7,8 @@ describe('when creates a new board', () => {
   const board = copyBoard(game._board);
 
   it('board is 7x6', () => {
-    expect(board.length).toBe(7);
-    expect(board[0].length).toBe(6);
+    expect(board.length).toBe(config.columns);
+    expect(board[0].length).toBe(config.rows);
   });
 
   it('board is empty', () => {
@@ -80,8 +81,16 @@ describe('when creates a new board', () => {
     );
 
     it('correctly lists available columns', () => {
-      expect(game._availableColumns(updatedBoard).length).toEqual(5);
-      expect(game._availableColumns(updatedBoard)).toEqual([0, 2, 3, 4, 6]);
+      expect(game._availableColumns(updatedBoard).length).toEqual(
+        config.columns - columnsNotAvailable.length
+      );
+
+      const allColumns = Array(config.columns)
+        .fill(null)
+        .map((column, i) => i);
+      expect(game._availableColumns(updatedBoard)).toEqual(
+        allColumns.filter(column => !columnsNotAvailable.includes(column))
+      );
     });
   });
 });
