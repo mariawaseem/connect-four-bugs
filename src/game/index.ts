@@ -8,7 +8,7 @@ import { Disk, Mode } from '../types';
  * Main Game class that holds the core logic of the game.
  */
 export class Game {
-  protected board: Disk[][];
+  protected board: Disk[][] = this.createBoard();
   protected turn = Math.random() > 0.5 ? Disk.Red : Disk.Yellow;
   private playerRed: BasePlayer;
   private playerYellow: BasePlayer;
@@ -27,9 +27,6 @@ export class Game {
     private mode: Mode,
     private printer: BasePrinter
   ) {
-    // Initialize the board.
-    this.board = this.createBoard();
-
     // Initialize the red and yellow players based on the game mode.
     switch (this.mode) {
       case Mode.TwoPlayers:
