@@ -8,15 +8,16 @@ import { Disk, Mode } from '../types';
  * Main Game class that holds the core logic of the game.
  */
 export class Game {
-  protected board: Disk[][] = [];
-  private maxColumns = config.maxColumns;
-  private maxRows = config.maxRows;
+  protected board: Disk[][];
   protected turn = Math.random() > 0.5 ? Disk.Red : Disk.Yellow;
   private playerRed: BasePlayer;
   private playerYellow: BasePlayer;
   private winner: BasePlayer | null = null;
-  private gameOver = false;
-  private get playerTurn() {
+
+  /**
+   * Dynamically retrieves the current player based on the current turn.
+   */
+  private get currentPlayer() {
     return this.turn === Disk.Red ? this.playerRed : this.playerYellow;
   }
 
@@ -26,7 +27,10 @@ export class Game {
     private mode: Mode,
     private printer: BasePrinter
   ) {
-    // Initialize red and yellow player based on the game mode.
+    // Initialize the board.
+    this.board = this.createBoard();
+
+    // Initialize the red and yellow players based on the game mode.
     switch (this.mode) {
       case Mode.TwoPlayers:
         this.playerRed = Object.create(this.humanPlayer);
@@ -47,21 +51,19 @@ export class Game {
    * Starts the game.
    */
   public async start(): Promise<void> {
-    // Setup the game.
-    await this.setup();
+    // Prompt for player names.
+    await this.promptPlayerNames();
 
     // Print a start screen.
     this.printer.printStartScreen(this.playerRed.name, this.playerYellow.name);
 
-    // Take turns until the game is over.
-    while (!this.gameOver) {
+    // Take turns until the winner is found.
+    while (!this.winner) {
       await this.doTurn();
     }
 
     // Print out the winner.
-    if (this.winner) {
-      this.printer.printWinner(this.winner.name, this.turn);
-    }
+    this.printer.printWinner(this.winner.name, this.turn);
   }
 
   /**
@@ -69,25 +71,23 @@ export class Game {
    */
   private async doTurn(): Promise<void> {
     // Print out current turn and available columns.
-    this.printer.printCurrentTurn(this.playerTurn.name, this.turn);
+    this.printer.printCurrentTurn(this.currentPlayer.name, this.turn);
     this.printer.printAvailableColumns(this.availableColumns(this.board));
 
-    // Create a column variable.
-    const availableColumns = this.availableColumns(this.board);
+    // Define a column variable.
     let column: number;
 
     // Make a move until it is valid.
     do {
+      // Check available columns
+      const availableColumns = this.availableColumns(this.board);
+
       // Move depending on the turn.
-      if (this.turn === Disk.Red) {
-        column = await this.playerRed.move(availableColumns);
-      } else {
-        column = await this.playerYellow.move(availableColumns);
-      }
+      column = await this.currentPlayer.move(availableColumns);
     } while (!this.isValidMove(column, this.board));
 
     // Print the players choice.
-    this.printer.printPickedColumn(this.playerTurn.name, this.turn, column);
+    this.printer.printPickedColumn(this.currentPlayer.name, this.turn, column);
 
     // Update the board.
     this.insertDisk(column);
@@ -96,14 +96,12 @@ export class Game {
     this.printer.printBoard(this.board);
 
     // Check if there is a winner.
-    const winner = this.checkWinner(this.board);
-    if (winner !== Disk.Empty) {
-      this.winner = this.playerTurn;
-    }
+    const winnerDisk = this.checkWinner(this.board);
 
-    // If there is a winner, finish the game.
-    if (this.winner) {
-      this.gameOver = true;
+    // If there is a winner...
+    if (winnerDisk !== Disk.Empty) {
+      // Set the winner property to the current player.
+      this.winner = this.currentPlayer;
     } else {
       // Change turn.
       this.turn = this.turn === Disk.Red ? Disk.Yellow : Disk.Red;
@@ -139,20 +137,12 @@ export class Game {
    */
   private isValidMove(column: number, board: Disk[][]): boolean {
     // Check the if the number is in the column range.
-    if (column < 0 || column > this.maxColumns) {
+    if (column < 0 || column > config.maxColumns) {
       return false;
     } else {
       // Check if the move is valid based on the board.
       return board[column].some(row => row === Disk.Empty);
     }
-  }
-
-  /**
-   * Prepares all necessary components.
-   */
-  private async setup(): Promise<void> {
-    await this.promptPlayerNames();
-    this.resetBoard();
   }
 
   /**
@@ -173,19 +163,25 @@ export class Game {
   }
 
   /**
-   * Resets the board.
+   * Creates a new board.
    */
-  protected resetBoard(): void {
-    for (let column = 0; column < this.maxColumns; column++) {
-      // Initialize each column.
-      this.board[column] = [];
+  protected createBoard(): Disk[][] {
+    // Initialize a new board.
+    let board: Disk[][] = [];
 
-      for (let row = 0; row < this.maxRows; row++) {
-        // Set every field to an empty disk.
-        this.board[column][row] = Disk.Empty;
+    for (let column = 0; column < config.maxColumns; column++) {
+      // Initialize each column as an empty array.
+      board[column] = [];
+
+      for (let row = 0; row < config.maxRows; row++) {
+        // Populate every field with an empty disk.
+        board[column][row] = Disk.Empty;
       }
     }
+
+    return board;
   }
+
   /**
    * Checks if there is a winner.
    */
