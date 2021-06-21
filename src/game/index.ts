@@ -8,10 +8,25 @@ import { Disk, Mode } from '../types';
  * Main Game class that holds the core logic of the game.
  */
 export class Game {
+  /**
+   * Game board.
+   */
   protected board: Disk[][] = this.createBoard();
+
+  /**
+   * Current disk's turn. Initialized randomly `Disk.Red` or `Disk.Yellow`.
+   */
   protected turn = Math.random() > 0.5 ? Disk.Red : Disk.Yellow;
+
+  /**
+   * Players. Initialized in the constructor based on the game mode.
+   */
   private playerRed: BasePlayer;
   private playerYellow: BasePlayer;
+
+  /**
+   * Winner. Initially `null`.
+   */
   private winner: BasePlayer | null = null;
 
   /**
@@ -134,7 +149,7 @@ export class Game {
    */
   private isValidMove(column: number, board: Disk[][]): boolean {
     // Check the if the number is in the column range.
-    if (column < 0 || column > config.maxColumns) {
+    if (column < 0 || column > config.columns) {
       return false;
     } else {
       // Check if the move is valid based on the board.
@@ -166,11 +181,11 @@ export class Game {
     // Initialize a new board.
     let board: Disk[][] = [];
 
-    for (let column = 0; column < config.maxColumns; column++) {
+    for (let column = 0; column < config.columns; column++) {
       // Initialize each column as an empty array.
       board[column] = [];
 
-      for (let row = 0; row < config.maxRows; row++) {
+      for (let row = 0; row < config.rows; row++) {
         // Populate every field with an empty disk.
         board[column][row] = Disk.Empty;
       }

@@ -8,8 +8,8 @@ class Config {
   /**
    * Board size.
    */
-  readonly maxColumns = 7;
-  readonly maxRows = 6;
+  readonly columns = 9;
+  readonly rows = 8;
 
   /**
    * CLI questions.
