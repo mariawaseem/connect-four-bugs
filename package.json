@@ -6,6 +6,7 @@
   "scripts": {
     "start": "node build/src/index.js",
     "dev": "ts-node-dev src/index.ts",
+    "all": "npm run test && npm run dev ",
     "build": "tsc",
     "test": "jest"
   },
