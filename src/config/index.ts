@@ -14,11 +14,6 @@ class Config {
   /**
    * CLI questions.
    */
-  readonly playerNameQuestion: DistinctQuestion = {
-    name: 'playerName',
-    type: 'input',
-    message: 'What is your name?',
-  };
 
   readonly gameModeQuestion: DistinctQuestion = {
     name: 'mode',
@@ -28,11 +23,26 @@ class Config {
     message: 'Game mode',
   };
 
-  readonly columnNumberQuestion: DistinctQuestion = {
-    name: 'column',
-    type: 'list',
-    message: 'Insert disk into column',
-  };
+  public playerNameQuestion(playerNumber: number): DistinctQuestion {
+    return {
+      name: 'playerName',
+      type: 'input',
+      message: 'What is your name?',
+      default: `Player ${playerNumber}`,
+    };
+  }
+
+  public columnNumberQuestion(availableColumns: number[]): DistinctQuestion {
+    // Build an array of string for the answer choices.
+    const choices = availableColumns.map(column => `${column}`);
+
+    return {
+      name: 'column',
+      type: 'list',
+      choices,
+      message: 'Insert disk into column',
+    };
+  }
 }
 
 export const config = new Config();

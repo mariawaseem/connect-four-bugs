@@ -6,10 +6,9 @@ import { Disk, IPlayerNameAnswer } from '../types';
  * Prompts for a player name.
  */
 export async function getPlayerName(disk: Disk): Promise<string> {
-  const { playerName } = await prompt<IPlayerNameAnswer>({
-    ...config.playerNameQuestion,
-    default: `Player ${disk}`,
-  });
+  const { playerName } = await prompt<IPlayerNameAnswer>(
+    config.playerNameQuestion(disk)
+  );
 
   return playerName;
 }

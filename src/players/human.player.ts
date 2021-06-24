@@ -12,10 +12,9 @@ export class HumanPlayer extends Player {
    */
   public async move(availableColumns: number[]): Promise<number> {
     // Prompt for a column number.
-    const { column } = await prompt<IColumnAnswer>({
-      ...config.columnNumberQuestion,
-      choices: availableColumns.map(column => `${column}`),
-    } as QuestionCollection<IColumnAnswer>);
+    const { column } = await prompt<IColumnAnswer>(
+      config.columnNumberQuestion(availableColumns)
+    );
     return column;
   }
 }
