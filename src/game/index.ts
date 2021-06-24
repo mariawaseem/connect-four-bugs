@@ -1,5 +1,5 @@
-import { BasePlayer } from '../players';
-import { BasePrinter } from '../printers';
+import { Player } from '../players';
+import { Printer } from '../printers';
 import { getPlayerName } from '../utils';
 import { config } from '../config';
 import { Disk, Mode } from '../types';
@@ -21,13 +21,13 @@ export class Game {
   /**
    * Players. Initialized in the constructor based on the game mode.
    */
-  private playerRed: BasePlayer;
-  private playerYellow: BasePlayer;
+  private playerRed: Player;
+  private playerYellow: Player;
 
   /**
    * Winner. Initially `null`.
    */
-  private winner: BasePlayer | null = null;
+  private winner: Player | null = null;
 
   /**
    * Dynamically retrieves the current player based on the current turn.
@@ -37,10 +37,10 @@ export class Game {
   }
 
   constructor(
-    private humanPlayer: BasePlayer,
-    private aiPlayer: BasePlayer,
+    private humanPlayer: Player,
+    private aiPlayer: Player,
     private mode: Mode,
-    private printer: BasePrinter
+    private printer: Printer
   ) {
     // Initialize the red and yellow players based on the game mode.
     switch (this.mode) {

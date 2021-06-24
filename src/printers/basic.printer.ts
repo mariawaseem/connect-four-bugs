@@ -1,7 +1,7 @@
-import { BasePrinter } from './';
+import { Printer } from './';
 import { Disk } from '../types';
 
-export class BasicPrinter extends BasePrinter {
+export class BasicPrinter extends Printer {
   /**
    * Prints a start screen.
    */

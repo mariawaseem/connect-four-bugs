@@ -1,9 +1,9 @@
 import chalk from 'chalk';
-import { BasePrinter } from './';
+import { Printer } from './';
 import { transpose } from '../utils';
 import { Disk } from '../types';
 
-export class ColorPrinter extends BasePrinter {
+export class ColorPrinter extends Printer {
   /**
    * Prints a start screen.
    */

@@ -1,9 +1,9 @@
 import { prompt, QuestionCollection } from 'inquirer';
-import { BasePlayer } from './';
+import { Player } from './';
 import { config } from '../config';
 import { PlayerType, IColumnAnswer } from '../types';
 
-export class HumanPlayer extends BasePlayer {
+export class HumanPlayer extends Player {
   readonly type = PlayerType.Human;
   readonly name = 'Human Player';
 

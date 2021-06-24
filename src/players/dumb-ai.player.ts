@@ -1,7 +1,7 @@
-import { BasePlayer } from './';
+import { Player } from './';
 import { PlayerType } from '../types';
 
-export class DumbAIPlayer extends BasePlayer {
+export class DumbAIPlayer extends Player {
   readonly type = PlayerType.AI;
   readonly name = 'Dumb AI';
 
