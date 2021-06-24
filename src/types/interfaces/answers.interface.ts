@@ -8,6 +8,6 @@ export interface IPlayerNameAnswer extends Answers {
   playerName: string;
 }
 
-export interface IGameModeAnswer {
+export interface IGameModeAnswer extends Answers {
   mode: string;
 }
