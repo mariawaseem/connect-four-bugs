@@ -1,4 +1,4 @@
-import { prompt, QuestionCollection } from 'inquirer';
+import { prompt } from 'inquirer';
 import { Player } from './';
 import { config } from '../config';
 import { PlayerType, IColumnAnswer } from '../types';
