@@ -2,7 +2,7 @@ import { Player } from '../players';
 import { Printer } from '../printers';
 import { getPlayerName } from '../utils';
 import { config } from '../config';
-import { Disk, Mode } from '../types';
+import { Disk, Mode, PlayerType } from '../types';
 
 /**
  * Main Game class that holds the core logic of the game.
@@ -161,16 +161,11 @@ export class Game {
    * Prompts for player names.
    */
   private async promptPlayerNames(): Promise<void> {
-    switch (this.mode) {
-      case Mode.OnePlayer:
-        this.playerRed.name = await getPlayerName(Disk.Red);
-        break;
-      case Mode.TwoPlayers:
-        this.playerRed.name = await getPlayerName(Disk.Red);
-        this.playerYellow.name = await getPlayerName(Disk.Yellow);
-        break;
-      default:
-        break;
+    if (this.playerRed.type === PlayerType.Human) {
+      this.playerRed.name = await getPlayerName(Disk.Red);
+    }
+    if (this.playerYellow.type === PlayerType.Human) {
+      this.playerYellow.name = await getPlayerName(Disk.Yellow);
     }
   }
 
