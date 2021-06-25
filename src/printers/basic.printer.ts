@@ -59,7 +59,7 @@ export class BasicPrinter extends Printer {
    * Prints the winner.
    */
   public printWinner(playerName: string, disk: Disk) {
-    console.log(`${playerName} (${this.getDiskColor(disk)}) is a winner!`);
+    console.log(`${playerName} (${this.getDiskColor(disk)}) is the winner!`);
   }
 
   /**

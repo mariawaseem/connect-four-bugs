@@ -95,7 +95,7 @@ export class ColorPrinter extends Printer {
    */
   public printWinner(playerName: string, disk: Disk) {
     console.log(
-      `Congratulations! ${this.colorName(playerName, disk)} is a winner!\n`
+      `Congratulations! ${this.colorName(playerName, disk)} is the winner!\n`
     );
   }
 
