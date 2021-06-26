@@ -149,7 +149,7 @@ export class Game {
    */
   private isValidMove(column: number, board: Disk[][]): boolean {
     // Check the if the number is in the column range.
-    if (column < 0 || column > config.columns) {
+    if (column < 0 || column >= config.columns) {
       return false;
     } else {
       // Check if the move is valid based on the board.
