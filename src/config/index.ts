@@ -1,5 +1,5 @@
 import { DistinctQuestion } from 'inquirer';
-import { Mode } from '../types';
+import { Disk, Mode, PlayAgain } from '../types';
 
 /**
  * Config class that contains all the game settings.
@@ -14,14 +14,6 @@ class Config {
   /**
    * CLI questions.
    */
-
-  readonly playAgainQuestion: DistinctQuestion = {
-    name: 'playAgain',
-    type: 'list',
-    choices: ['yes', 'no'],
-    message: 'Play again?',
-  };
-
   readonly gameModeQuestion: DistinctQuestion = {
     name: 'mode',
     type: 'list',
@@ -30,7 +22,14 @@ class Config {
     message: 'Game mode',
   };
 
-  public playerNameQuestion(playerNumber: number): DistinctQuestion {
+  readonly playAgainQuestion: DistinctQuestion = {
+    name: 'playAgain',
+    type: 'list',
+    choices: Object.values(PlayAgain),
+    message: 'Play again?',
+  };
+
+  public playerNameQuestion(playerNumber: Disk): DistinctQuestion {
     return {
       name: 'playerName',
       type: 'input',
@@ -40,13 +39,11 @@ class Config {
   }
 
   public columnNumberQuestion(availableColumns: number[]): DistinctQuestion {
-    // Build an array of string for the answer choices.
-    const choices = availableColumns.map(column => `${column}`);
-
     return {
       name: 'column',
       type: 'list',
-      choices,
+      // Build an array of string for the answer choices.
+      choices: availableColumns.map(column => `${column}`),
       message: 'Insert disk into column',
     };
   }

@@ -63,19 +63,17 @@ export class Game {
    * Starts the game.
    */
   public async start(): Promise<void> {
+    // Prompt for player names.
+    await this.promptPlayerNames();
+
+    // Print a start screen.
+    this.printer.printStartScreen(this.playerRed.name, this.playerYellow.name);
+
+    // Define the play again variable.
     let playAgain: boolean;
 
     // Repeat until the player doesn't want to play again.
     do {
-      // Prompt for player names.
-      await this.promptPlayerNames();
-
-      // Print a start screen.
-      this.printer.printStartScreen(
-        this.playerRed.name,
-        this.playerYellow.name
-      );
-
       // Take turns until the winner is found.
       while (!this.winner) {
         await this.doTurn();
@@ -137,6 +135,9 @@ export class Game {
   }
 
   private resetGame(): void {
+    // Clear the console.
+    console.clear();
+
     // Create a fresh new board.
     this.board = this.createBoard();
 
@@ -153,7 +154,7 @@ export class Game {
         this.isValidMove(columnIndex, board)
           ? [...availableColumns, columnIndex]
           : availableColumns,
-      []
+      [] as number[]
     );
   }
 
