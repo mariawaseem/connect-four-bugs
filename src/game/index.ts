@@ -1,6 +1,6 @@
 import { Player } from '../players';
 import { Printer } from '../printers';
-import { getPlayerName } from '../utils';
+import { askPlayAgain, getPlayerName } from '../utils';
 import { config } from '../config';
 import { Disk, Mode, PlayerType } from '../types';
 
@@ -63,19 +63,35 @@ export class Game {
    * Starts the game.
    */
   public async start(): Promise<void> {
-    // Prompt for player names.
-    await this.promptPlayerNames();
+    let playAgain: boolean;
 
-    // Print a start screen.
-    this.printer.printStartScreen(this.playerRed.name, this.playerYellow.name);
+    // Repeat until the player doesn't want to play again.
+    do {
+      // Prompt for player names.
+      await this.promptPlayerNames();
 
-    // Take turns until the winner is found.
-    while (!this.winner) {
-      await this.doTurn();
-    }
+      // Print a start screen.
+      this.printer.printStartScreen(
+        this.playerRed.name,
+        this.playerYellow.name
+      );
 
-    // Print out the winner.
-    this.printer.printWinner(this.winner.name, this.turn);
+      // Take turns until the winner is found.
+      while (!this.winner) {
+        await this.doTurn();
+      }
+
+      // Print out the winner.
+      this.printer.printWinner(this.winner.name, this.turn);
+
+      // Ask if the player wants to play again.
+      playAgain = await askPlayAgain();
+
+      if (playAgain) {
+        // Reset the game.
+        this.resetGame();
+      }
+    } while (playAgain);
   }
 
   /**
@@ -118,6 +134,14 @@ export class Game {
       // Change turn.
       this.turn = this.turn === Disk.Red ? Disk.Yellow : Disk.Red;
     }
+  }
+
+  private resetGame(): void {
+    // Create a fresh new board.
+    this.board = this.createBoard();
+
+    // Remove the winner.
+    this.winner = null;
   }
 
   /**

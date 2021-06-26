@@ -1,7 +1,7 @@
 import { Game } from './game';
 import { DumbAIPlayer, HumanPlayer } from './players';
 import { ColorPrinter, BasicPrinter } from './printers';
-import { chooseGameMode } from './utils';
+import { askPlayAgain, chooseGameMode } from './utils';
 
 async function main(): Promise<void> {
   // Prompt for the game mode.
@@ -18,7 +18,6 @@ async function main(): Promise<void> {
   // Create a game, passing players, game mode, and a printer.
   const game = new Game(humanPlayer, aiPlayer, mode, colorPrinter);
 
-  // Start the game.
   game.start();
 }
 

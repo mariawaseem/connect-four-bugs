@@ -15,6 +15,13 @@ class Config {
    * CLI questions.
    */
 
+  readonly playAgainQuestion: DistinctQuestion = {
+    name: 'playAgain',
+    type: 'list',
+    choices: ['yes', 'no'],
+    message: 'Play again?',
+  };
+
   readonly gameModeQuestion: DistinctQuestion = {
     name: 'mode',
     type: 'list',

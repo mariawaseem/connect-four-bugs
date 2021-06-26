@@ -11,3 +11,7 @@ export interface IPlayerNameAnswer extends Answers {
 export interface IGameModeAnswer extends Answers {
   mode: string;
 }
+
+export interface IPlayAgainAnswer extends Answers {
+  playAgain: string;
+}
