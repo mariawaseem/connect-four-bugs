@@ -17,8 +17,7 @@ class Config {
   readonly gameModeQuestion: DistinctQuestion = {
     name: 'mode',
     type: 'list',
-    // Build the choice array and filter just the mode descriptions.
-    choices: Object.keys(Mode).filter(key => key.length > 1),
+    choices: Object.values(Mode),
     message: 'Game mode',
   };
 

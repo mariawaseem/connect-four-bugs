@@ -1,4 +1,6 @@
 import { Answers } from 'inquirer';
+import { Mode } from '../enums/mode.enum';
+import { PlayAgain } from '../enums/play-again.enum';
 
 export interface ColumnAnswer extends Answers {
   column: number;
@@ -9,9 +11,9 @@ export interface PlayerNameAnswer extends Answers {
 }
 
 export interface GameModeAnswer extends Answers {
-  mode: string;
+  mode: Mode;
 }
 
 export interface PlayAgainAnswer extends Answers {
-  playAgain: string;
+  playAgain: PlayAgain;
 }

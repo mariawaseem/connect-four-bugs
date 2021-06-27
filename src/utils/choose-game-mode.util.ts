@@ -11,5 +11,5 @@ export async function chooseGameMode(): Promise<Mode> {
 
   const { mode } = await prompt<GameModeAnswer>(config.gameModeQuestion);
 
-  return +Mode[mode as any];
+  return mode;
 }
