@@ -1,17 +1,17 @@
 import { Answers } from 'inquirer';
 
-export interface IColumnAnswer extends Answers {
+export interface ColumnAnswer extends Answers {
   column: number;
 }
 
-export interface IPlayerNameAnswer extends Answers {
+export interface PlayerNameAnswer extends Answers {
   playerName: string;
 }
 
-export interface IGameModeAnswer extends Answers {
+export interface GameModeAnswer extends Answers {
   mode: string;
 }
 
-export interface IPlayAgainAnswer extends Answers {
+export interface PlayAgainAnswer extends Answers {
   playAgain: string;
 }
