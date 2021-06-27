@@ -37,24 +37,24 @@ export class Game {
   }
 
   constructor(
-    private humanPlayer: Player,
-    private aiPlayer: Player,
-    private mode: Mode,
+    humanPlayer: Player,
+    aiPlayer: Player,
+    mode: Mode,
     private printer: Printer
   ) {
     // Initialize the red and yellow players based on the game mode.
-    switch (this.mode) {
+    switch (mode) {
       case Mode.TwoPlayers:
-        this.playerRed = Object.create(this.humanPlayer);
-        this.playerYellow = Object.create(this.humanPlayer);
+        this.playerRed = Object.create(humanPlayer);
+        this.playerYellow = Object.create(humanPlayer);
         break;
       case Mode.OnlyAI:
-        this.playerRed = Object.create(this.aiPlayer);
-        this.playerYellow = Object.create(this.aiPlayer);
+        this.playerRed = Object.create(aiPlayer);
+        this.playerYellow = Object.create(aiPlayer);
         break;
       default:
-        this.playerRed = Object.create(this.humanPlayer);
-        this.playerYellow = Object.create(this.aiPlayer);
+        this.playerRed = Object.create(humanPlayer);
+        this.playerYellow = Object.create(aiPlayer);
         break;
     }
   }
