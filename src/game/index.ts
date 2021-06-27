@@ -178,7 +178,7 @@ export class Game {
       return false;
     } else {
       // Check if the move is valid based on the board.
-      return board[column].some(row => row === Disk.Empty);
+      return board[column]?.some(row => row === Disk.Empty);
     }
   }
 

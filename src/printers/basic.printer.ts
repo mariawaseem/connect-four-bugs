@@ -1,4 +1,4 @@
-import { Printer } from './';
+import { Printer } from './printer';
 import { Disk } from '../types';
 
 export class BasicPrinter extends Printer {

@@ -1,4 +1,4 @@
-import { Player } from './';
+import { Player } from './player';
 import { PlayerType } from '../types';
 
 export class DumbAIPlayer extends Player {

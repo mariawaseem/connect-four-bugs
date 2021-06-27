@@ -1,5 +1,5 @@
 import { prompt } from 'inquirer';
-import { Player } from './';
+import { Player } from './player';
 import { config } from '../config';
 import { PlayerType, IColumnAnswer } from '../types';
 

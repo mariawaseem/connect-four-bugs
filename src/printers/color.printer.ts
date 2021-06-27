@@ -1,5 +1,5 @@
 import chalk from 'chalk';
-import { Printer } from './';
+import { Printer } from './printer';
 import { transpose } from '../utils';
 import { Disk } from '../types';
 
