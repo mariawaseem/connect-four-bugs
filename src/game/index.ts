@@ -21,8 +21,8 @@ export class Game {
   /**
    * Players. Initialized in the constructor based on the game mode.
    */
-  private playerRed: Player;
-  private playerYellow: Player;
+  readonly playerRed: Player;
+  readonly playerYellow: Player;
 
   /**
    * Winner. Initially `null`.
