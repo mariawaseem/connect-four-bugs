@@ -14,9 +14,10 @@ export class Game {
   protected board: Disk[][] = this.createBoard();
 
   /**
-   * Current disk's turn. Initialized randomly `Disk.Red` or `Disk.Yellow`.
+   * Current disk's turn. Initialized randomly as `Disk.Red` or `Disk.Yellow`.
    */
-  protected turn = Math.random() > 0.5 ? Disk.Red : Disk.Yellow;
+  protected turn: Disk.Red | Disk.Yellow =
+    Math.random() > 0.5 ? Disk.Red : Disk.Yellow;
 
   /**
    * Players. Initialized in the constructor based on the game mode.
@@ -32,7 +33,7 @@ export class Game {
   /**
    * Dynamically retrieves the current player based on the current turn.
    */
-  private get currentPlayer() {
+  private get currentPlayer(): Player {
     return this.turn === Disk.Red ? this.playerRed : this.playerYellow;
   }
 
@@ -69,10 +70,10 @@ export class Game {
     // Print a start screen.
     this.printer.printStartScreen(this.playerRed.name, this.playerYellow.name);
 
-    // Define the play again variable.
+    // Define the `playAgain` variable.
     let playAgain: boolean;
 
-    // Repeat until the player doesn't want to play again.
+    // Repeat the game until the player doesn't want to play again.
     do {
       // Take turns until the winner is found.
       while (!this.winner) {
@@ -138,7 +139,7 @@ export class Game {
     // Clear the console.
     console.clear();
 
-    // Create a fresh new board.
+    // Create a new board.
     this.board = this.createBoard();
 
     // Remove the winner.

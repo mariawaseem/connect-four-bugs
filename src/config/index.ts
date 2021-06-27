@@ -41,7 +41,6 @@ class Config {
     return {
       name: 'column',
       type: 'list',
-      // Build an array of string for the answer choices.
       choices: availableColumns.map(column => `${column}`),
       message: 'Insert disk into column',
     };
