@@ -11,8 +11,8 @@ class TestGame extends Game {
   public _board: Disk[][] = this.board;
   public _turn: Disk = this.turn;
 
-  public _availableColumns(board: Disk[][]): number[] {
-    return this.availableColumns(board);
+  public _listAvailableColumns(board: Disk[][]): number[] {
+    return this.listAvailableColumns(board);
   }
 
   public _createBoard(): Disk[][] {

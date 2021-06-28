@@ -81,14 +81,14 @@ describe('when creates a new board', () => {
     );
 
     it('correctly lists available columns', () => {
-      expect(game._availableColumns(updatedBoard).length).toEqual(
+      expect(game._listAvailableColumns(updatedBoard).length).toEqual(
         config.columns - columnsNotAvailable.length
       );
 
       const allColumns = Array(config.columns)
         .fill(null)
         .map((column, i) => i);
-      expect(game._availableColumns(updatedBoard)).toEqual(
+      expect(game._listAvailableColumns(updatedBoard)).toEqual(
         allColumns.filter(column => !columnsNotAvailable.includes(column))
       );
     });
