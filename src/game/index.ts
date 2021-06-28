@@ -97,18 +97,18 @@ export class Game {
    * Execute the turn.
    */
   private async doTurn(): Promise<void> {
+    // Check available columns
+    const availableColumns = this.availableColumns(this.board);
+
     // Print out current turn and available columns.
     this.printer.printCurrentTurn(this.currentPlayer.name, this.turn);
-    this.printer.printAvailableColumns(this.availableColumns(this.board));
+    this.printer.printAvailableColumns(availableColumns);
 
     // Define a column variable.
     let column: number;
 
     // Make a move until it is valid.
     do {
-      // Check available columns
-      const availableColumns = this.availableColumns(this.board);
-
       // Move depending on the turn.
       column = await this.currentPlayer.move(availableColumns);
     } while (!this.isValidMove(column, this.board));
