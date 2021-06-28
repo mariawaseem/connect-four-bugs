@@ -98,7 +98,7 @@ export class Game {
    */
   private async doTurn(): Promise<void> {
     // Check available columns
-    const availableColumns = this.availableColumns(this.board);
+    const availableColumns = this.listAvailableColumns(this.board);
 
     // Print out current turn and available columns.
     this.printer.printCurrentTurn(this.currentPlayer.name, this.turn);
@@ -149,7 +149,7 @@ export class Game {
   /**
    * Lists all available columns.
    */
-  protected availableColumns(board: Disk[][]): number[] {
+  protected listAvailableColumns(board: Disk[][]): number[] {
     return board.reduce(
       (availableColumns, _column, columnIndex) =>
         this.isValidMove(columnIndex, board)
