@@ -105,19 +105,23 @@ export class Game {
     this.printer.printAvailableColumns(availableColumns);
 
     // Define a column variable.
-    let column: number;
+    let pickedColumn: number;
 
     // Make a move until it is valid.
     do {
       // Move depending on the turn.
-      column = await this.currentPlayer.move(availableColumns);
-    } while (!this.isValidMove(column, this.board));
+      pickedColumn = await this.currentPlayer.move(availableColumns);
+    } while (!this.isValidMove(pickedColumn, this.board));
 
     // Print the players choice.
-    this.printer.printPickedColumn(this.currentPlayer.name, this.turn, column);
+    this.printer.printPickedColumn(
+      this.currentPlayer.name,
+      this.turn,
+      pickedColumn
+    );
 
     // Update the board.
-    this.insertDisk(column);
+    this.insertDisk(pickedColumn);
 
     // Display the board.
     this.printer.printBoard(this.board);
