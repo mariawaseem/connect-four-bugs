@@ -230,41 +230,42 @@ export class Game {
     for (let c = 0; c < width; c++) {
       // Iterate over rows, bottom to top.
       for (let r = 0; r < height; r++) {
-        const player = board[c][r];
+        // Check every disk in the board.
+        const disk = board[c][r];
 
-        // Don't check empty slots.
-        if (player === Disk.Empty) {
+        // Don't check empty disks.
+        if (disk === Disk.Empty) {
           continue;
         }
 
         if (
           r + 3 < height &&
-          player === board[c][r + 1] && // Look up.
-          player === board[c][r + 2] &&
-          player === board[c][r + 3]
+          disk === board[c][r + 1] && // Look up.
+          disk === board[c][r + 2] &&
+          disk === board[c][r + 3]
         )
-          return player;
+          return disk;
         if (c + 3 < width) {
           if (
-            player === board[c + 1][r] && // Look right.
-            player === board[c + 2][r] &&
-            player === board[c + 3][r]
+            disk === board[c + 1][r] && // Look right.
+            disk === board[c + 2][r] &&
+            disk === board[c + 3][r]
           )
-            return player;
+            return disk;
           if (
             r + 3 < height &&
-            player == board[c + 1][r + 1] && // Look up & right.
-            player == board[c + 2][r + 2] &&
-            player == board[c + 3][r + 3]
+            disk === board[c + 1][r + 1] && // Look up & right.
+            disk === board[c + 2][r + 2] &&
+            disk === board[c + 3][r + 3]
           )
-            return player;
+            return disk;
           if (
             r - 3 >= 0 &&
-            player === board[c + 1][r - 1] && // Look up & left.
-            player === board[c + 2][r - 2] &&
-            player === board[c + 3][r - 3]
+            disk === board[c + 1][r - 1] && // Look up & left.
+            disk === board[c + 2][r - 2] &&
+            disk === board[c + 3][r - 3]
           )
-            return player;
+            return disk;
         }
       }
     }
