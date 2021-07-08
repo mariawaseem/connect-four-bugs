@@ -63,7 +63,7 @@ export class Game {
   /**
    * Starts the game.
    */
-  public async start(): Promise<void> {
+  async start(): Promise<void> {
     // Prompt for player names.
     await this.promptPlayerNames();
 

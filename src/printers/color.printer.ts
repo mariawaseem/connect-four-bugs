@@ -7,7 +7,7 @@ export class ColorPrinter extends Printer {
   /**
    * Prints a start screen.
    */
-  public printStartScreen(playerRed: string, playerYellow: string): void {
+  printStartScreen(playerRed: string, playerYellow: string): void {
     // Clear the console.
     console.clear();
 
@@ -28,7 +28,7 @@ export class ColorPrinter extends Printer {
   /**
    * Prints current state of the game board.
    */
-  public printBoard(board: Disk[][]): void {
+  printBoard(board: Disk[][]): void {
     // Print a new line.
     console.log();
 
@@ -63,25 +63,21 @@ export class ColorPrinter extends Printer {
   /**
    * Prints current player's turn.
    */
-  public printCurrentTurn(playerName: string, disk: Disk): void {
+  printCurrentTurn(playerName: string, disk: Disk): void {
     console.log(`${this.colorName(playerName, disk)}'s turn`);
   }
 
   /**
    * Prints available columns.
    */
-  public printAvailableColumns(columns: number[]): void {
+  printAvailableColumns(columns: number[]): void {
     console.log(`Available columns: ${columns.join(', ')}`);
   }
 
   /**
    * Prints columns picked by a player.
    */
-  public printPickedColumn(
-    playerName: string,
-    disk: Disk,
-    column: number
-  ): void {
+  printPickedColumn(playerName: string, disk: Disk, column: number): void {
     console.log(
       `${this.colorName(
         playerName,
@@ -93,7 +89,7 @@ export class ColorPrinter extends Printer {
   /**
    * Prints the winner.
    */
-  public printWinner(playerName: string, disk: Disk) {
+  printWinner(playerName: string, disk: Disk) {
     console.log(
       `Congratulations! ${this.colorName(playerName, disk)} is the winner!\n`
     );

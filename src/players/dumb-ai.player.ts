@@ -8,7 +8,7 @@ export class DumbAIPlayer extends Player {
   /**
    * Makes a move based on available columns.
    */
-  public async move(availableColumns: number[]): Promise<number> {
+  async move(availableColumns: number[]): Promise<number> {
     // Pick a random column.
     const randomIndex = Math.floor(Math.random() * availableColumns.length);
     const column = availableColumns[randomIndex];

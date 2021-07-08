@@ -5,7 +5,7 @@ export class BasicPrinter extends Printer {
   /**
    * Prints a start screen.
    */
-  public printStartScreen(playerRed: string, playerYellow: string): void {
+  printStartScreen(playerRed: string, playerYellow: string): void {
     console.log('Welcome to Connect4');
     console.log(`Player 1: ${playerRed} (${this.getDiskColor(Disk.Red)}) `);
     console.log(
@@ -16,7 +16,7 @@ export class BasicPrinter extends Printer {
   /**
    * Prints current state of the game board.
    */
-  public printBoard(board: Disk[][]): void {
+  printBoard(board: Disk[][]): void {
     // Print a new line.
     console.log();
 
@@ -31,25 +31,21 @@ export class BasicPrinter extends Printer {
   /**
    * Prints current player's turn.
    */
-  public printCurrentTurn(playerName: string, disk: Disk): void {
+  printCurrentTurn(playerName: string, disk: Disk): void {
     console.log(`${playerName}' turn (${this.getDiskColor(disk)})`);
   }
 
   /**
    * Prints available columns.
    */
-  public printAvailableColumns(columns: number[]): void {
+  printAvailableColumns(columns: number[]): void {
     console.log(`Available columns: ${columns}`);
   }
 
   /**
    * Prints columns picked by a player.
    */
-  public printPickedColumn(
-    playerName: string,
-    disk: Disk,
-    column: number
-  ): void {
+  printPickedColumn(playerName: string, disk: Disk, column: number): void {
     console.log(
       `${playerName} (${this.getDiskColor(disk)}) picks column number ${column}`
     );
@@ -58,7 +54,7 @@ export class BasicPrinter extends Printer {
   /**
    * Prints the winner.
    */
-  public printWinner(playerName: string, disk: Disk) {
+  printWinner(playerName: string, disk: Disk) {
     console.log(`${playerName} (${this.getDiskColor(disk)}) is the winner!`);
   }
 

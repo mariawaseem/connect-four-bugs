@@ -10,7 +10,7 @@ export class HumanPlayer extends Player {
   /**
    * Makes a move based on available columns.
    */
-  public async move(availableColumns: number[]): Promise<number> {
+  async move(availableColumns: number[]): Promise<number> {
     // Prompt for a column number.
     const { column } = await prompt<ColumnAnswer>(
       config.columnNumberQuestion(availableColumns)

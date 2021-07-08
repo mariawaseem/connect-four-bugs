@@ -28,7 +28,7 @@ class Config {
     message: 'Play again?',
   };
 
-  public playerNameQuestion(playerNumber: Disk): DistinctQuestion {
+  playerNameQuestion(playerNumber: Disk): DistinctQuestion {
     return {
       name: 'playerName',
       type: 'input',
@@ -37,7 +37,7 @@ class Config {
     };
   }
 
-  public columnNumberQuestion(availableColumns: number[]): DistinctQuestion {
+  columnNumberQuestion(availableColumns: number[]): DistinctQuestion {
     return {
       name: 'column',
       type: 'list',
