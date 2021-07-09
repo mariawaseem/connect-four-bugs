@@ -8,8 +8,20 @@ import { Disk, Mode } from '../src/types';
  * properties and methods required for testing.
  */
 class TestGame extends Game {
-  public _board: Disk[][] = this.board;
-  public _turn: Disk = this.turn;
+  get _board(): Disk[][] {
+    return this.board;
+  }
+
+  set _board(value: Disk[][]) {
+    this.board = value;
+  }
+
+  get _turn(): Disk {
+    return this.turn;
+  }
+
+  // public _board: Disk[][] = this.board;
+  // public _turn: Disk = this.turn;
 
   public _listAvailableColumns(board: Disk[][]): number[] {
     return this.listAvailableColumns(board);
@@ -32,6 +44,7 @@ class TestGame extends Game {
 const humanPlayer = new HumanPlayer();
 const aiPlayer = new DumbAIPlayer();
 const colorPrinter = new ColorPrinter();
+
 export const game = new TestGame(
   humanPlayer,
   aiPlayer,
@@ -39,6 +52,6 @@ export const game = new TestGame(
   colorPrinter
 );
 
-export function copyBoard(board: Disk[][]): Disk[][] {
-  return board.map(column => column.map(row => row));
-}
+// export function copyBoard(board: Disk[][]): Disk[][] {
+//   return board.map(column => column.map(row => row));
+// }

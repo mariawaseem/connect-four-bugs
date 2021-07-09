@@ -1,47 +1,45 @@
 import { config } from '../src/config';
 import { Disk } from '../src/types';
-import { copyBoard, game } from './jest.setup';
+import { game } from './jest.setup';
 
-describe('when creates a new board', () => {
-  // Create a fresh copy.
-  const board = copyBoard(game._board);
+/**
+ * Test everything related to the game board.
+ */
+describe('when creates a new, empty board', () => {
+  // Create a new board.
+  game._board = game._createBoard();
+
+  // Flatten the board array and check if empty.
+  const isEmpty = game._board.flat().every(disk => disk === Disk.Empty);
+  expect(isEmpty).toBe(true);
 
   it('board is 7x6', () => {
-    expect(board.length).toBe(config.columns);
-    expect(board[0].length).toBe(config.rows);
-  });
-
-  it('board is empty', () => {
-    const isEmpty = board.flat().every(disk => disk === Disk.Empty);
-    expect(isEmpty).toBe(true);
+    // Test if the column dimensions are correct.
+    expect(game._board.length).toBe(config.columns);
+    expect(game._board[0].length).toBe(config.rows);
   });
 
   describe('and when a board has 4 red disks in a row horizontally', () => {
-    // Create a copy
-    let winBoard = copyBoard(game._board);
-
     // Populate the board with 4 reds in a row.
     for (let i = 0; i < 4; i++) {
-      winBoard[i][0] = Disk.Red;
+      game._board[i][0] = Disk.Red;
     }
 
     it('detects a winner', () => {
-      const winner = game._checkWinner(winBoard);
+      const winner = game._checkWinner(game._board);
 
       expect(winner).toEqual(Disk.Red);
     });
   });
 
   describe('and when a board has 4 red disks in a row vertically', () => {
-    let winBoard = copyBoard(game._board);
-
     // Populate the board with 4 reds in a row.
     for (let i = 0; i < 4; i++) {
-      winBoard[0][i] = Disk.Red;
+      game._board[0][i] = Disk.Red;
     }
 
     it('detects a winner', () => {
-      const winner = game._checkWinner(winBoard);
+      const winner = game._checkWinner(game._board);
 
       expect(winner).toEqual(Disk.Red);
     });
@@ -49,14 +47,12 @@ describe('when creates a new board', () => {
 
   describe('and when a board has 4 red disks in a row diagonally', () => {
     // Populate the board with 4 reds in a row.
-    let winBoard = copyBoard(game._board);
-
     for (let i = 0; i < 4; i++) {
-      winBoard[i][i] = Disk.Red;
+      game._board[i][i] = Disk.Red;
     }
 
     it('detects a winner', () => {
-      const winner = game._checkWinner(winBoard);
+      const winner = game._checkWinner(game._board);
 
       expect(winner).toEqual(Disk.Red);
     });
@@ -65,10 +61,9 @@ describe('when creates a new board', () => {
   let pickedColumn = 3;
   describe(`and when a red disk is thrown into column ${pickedColumn}`, () => {
     game._insertDisk(pickedColumn);
-    let updatedBoard = copyBoard(game._board);
 
     it('correctly updates the board', () => {
-      expect(updatedBoard[pickedColumn][0]).toEqual(game._turn);
+      expect(game._board[pickedColumn][0]).toEqual(game._turn);
     });
   });
 
