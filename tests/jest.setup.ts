@@ -12,30 +12,27 @@ class TestGame extends Game {
     return this.board;
   }
 
-  set _board(value: Disk[][]) {
-    this.board = value;
+  set _board(board: Disk[][]) {
+    this.board = board;
   }
 
   get _turn(): Disk {
     return this.turn;
   }
 
-  // public _board: Disk[][] = this.board;
-  // public _turn: Disk = this.turn;
-
-  public _listAvailableColumns(board: Disk[][]): number[] {
+  _listAvailableColumns(board: Disk[][]): number[] {
     return this.listAvailableColumns(board);
   }
 
-  public _createBoard(): Disk[][] {
+  _createBoard(): Disk[][] {
     return this.createBoard();
   }
 
-  public _checkWinner(board: Disk[][]): Disk {
+  _checkWinner(board: Disk[][]): Disk {
     return this.checkWinner(board);
   }
 
-  public _insertDisk(column: number): void {
+  _insertDisk(column: number): void {
     this.insertDisk(column);
   }
 }
@@ -52,6 +49,10 @@ export const game = new TestGame(
   colorPrinter
 );
 
-// export function copyBoard(board: Disk[][]): Disk[][] {
-//   return board.map(column => column.map(row => row));
-// }
+/**
+ * Setup all the necessary actions before and after tests.
+ */
+beforeEach(() => {
+  // Reset the game board before every test.
+  game._board = game._createBoard();
+});
