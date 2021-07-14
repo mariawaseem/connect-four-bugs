@@ -18,7 +18,7 @@ To start the game, run command:
  npm run dev
 ```
 
-To test and run after, run command:
+To execute tests and start the game after, run command:
 
 ```bash
 npm run all
