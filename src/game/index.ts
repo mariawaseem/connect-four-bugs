@@ -89,6 +89,9 @@ export class Game {
       if (playAgain) {
         // Reset the game.
         this.resetGame();
+      } else {
+        // Clear the console.
+        console.clear();
       }
     } while (playAgain);
   }
