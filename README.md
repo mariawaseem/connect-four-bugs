@@ -12,13 +12,13 @@ There are three game modes available:
 
 ## Usage
 
-To start the game, run command:
+To start the game run:
 
 ```bash
  npm run dev
 ```
 
-To execute tests and start the game after, run command:
+To execute tests and start the game after run:
 
 ```bash
 npm run all
@@ -26,7 +26,7 @@ npm run all
 
 ## Tests
 
-To execute tests, run command:
+To execute tests run:
 
 ```bash
 npm run test
