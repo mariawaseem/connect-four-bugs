@@ -16,7 +16,12 @@ async function main(): Promise<void> {
   const colorPrinter = new ColorPrinter();
 
   // Create a game, passing players, game mode, and a printer.
-  const game = new Game(humanPlayer, aiPlayer, mode, colorPrinter);
+  const game = new Game({
+    humanPlayer,
+    aiPlayer,
+    mode,
+    printer: colorPrinter,
+  });
 
   // Start the game.
   game.start();

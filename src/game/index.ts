@@ -1,8 +1,8 @@
 import { Player } from '../players';
 import { Printer } from '../printers';
-import { askPlayAgain, getPlayerName } from '../utils';
 import { config } from '../config';
-import { Disk, Mode, PlayerType } from '../types';
+import { askPlayAgain, getPlayerName } from '../utils';
+import { Disk, GameOptions, Mode, PlayerType } from '../types';
 
 /**
  * Main Game class that holds the core logic of the game.
@@ -26,6 +26,11 @@ export class Game {
   private playerYellow: Player;
 
   /**
+   * Printer used for logging game events.
+   */
+  private printer: Printer;
+
+  /**
    * Winner. Initially `null`.
    */
   private winner: Player | null = null;
@@ -37,12 +42,10 @@ export class Game {
     return this.turn === Disk.Red ? this.playerRed : this.playerYellow;
   }
 
-  constructor(
-    humanPlayer: Player,
-    aiPlayer: Player,
-    mode: Mode,
-    private printer: Printer
-  ) {
+  constructor({ humanPlayer, aiPlayer, mode, printer }: GameOptions) {
+    // Initialize the printer.
+    this.printer = printer;
+
     // Initialize the red and yellow players based on the game mode.
     switch (mode) {
       case Mode.TwoPlayers:
