@@ -145,6 +145,9 @@ export class Game {
     }
   }
 
+  /**
+   * Resets the board and the winner.
+   */
   private resetGame(): void {
     // Clear the console.
     console.clear();
