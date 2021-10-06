@@ -213,7 +213,7 @@ export class Game {
    */
   protected createBoard(): Disk[][] {
     // Initialize a new board.
-    let board: Disk[][] = [];
+    const board: Disk[][] = [];
 
     for (let column = 0; column < config.columns; column++) {
       // Initialize each column as an empty array.
