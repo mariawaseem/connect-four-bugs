@@ -42,12 +42,12 @@ const humanPlayer = new HumanPlayer();
 const aiPlayer = new DumbAIPlayer();
 const colorPrinter = new ColorPrinter();
 
-export const game = new TestGame(
+export const game = new TestGame({
   humanPlayer,
   aiPlayer,
-  Mode.OnePlayer,
-  colorPrinter
-);
+  mode: Mode.OnePlayer,
+  printer: colorPrinter,
+});
 
 /**
  * Setup all the necessary actions before and after tests.
