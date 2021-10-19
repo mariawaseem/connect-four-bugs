@@ -12,6 +12,11 @@ class Config {
   readonly rows = 6;
 
   /**
+   * AI move delay time in ms.
+   */
+  readonly aiMoveDelay = 1000;
+
+  /**
    * CLI questions.
    */
   readonly gameModeQuestion: DistinctQuestion = {

@@ -1,5 +1,6 @@
 import { Player } from './player';
 import { PlayerType } from '../types';
+import { config } from '../config';
 
 export class DumbAIPlayer extends Player {
   readonly type = PlayerType.AI;
@@ -13,6 +14,8 @@ export class DumbAIPlayer extends Player {
     const randomIndex = Math.floor(Math.random() * availableColumns.length);
     const column = availableColumns[randomIndex];
 
-    return new Promise((resolve, _reject) => resolve(column));
+    return new Promise((resolve, _reject) =>
+      setTimeout(() => resolve(column), config.aiMoveDelay)
+    );
   }
 }
