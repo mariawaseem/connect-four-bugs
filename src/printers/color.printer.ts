@@ -64,7 +64,7 @@ export class ColorPrinter extends Printer {
    * Prints current player's turn.
    */
   printCurrentTurn(playerName: string, disk: Disk): void {
-    console.log(`${this.colorName(playerName, disk)}'s turn`);
+    console.log(`${this.colorName(playerName, disk)} thinks...`);
   }
 
   /**
