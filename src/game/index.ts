@@ -116,7 +116,10 @@ export class Game {
     // Make a move until it is valid.
     do {
       // Move depending on the turn.
-      pickedColumn = await this.currentPlayer.move(availableColumns);
+      pickedColumn = await this.currentPlayer.move(
+        this.board,
+        availableColumns
+      );
     } while (!this.isValidMove(pickedColumn, this.board));
 
     // Print the players choice.

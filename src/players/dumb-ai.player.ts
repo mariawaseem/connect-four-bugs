@@ -1,5 +1,5 @@
 import { Player } from './player';
-import { PlayerType } from '../types';
+import { Disk, PlayerType } from '../types';
 import { config } from '../config';
 
 export class DumbAIPlayer extends Player {
@@ -9,7 +9,7 @@ export class DumbAIPlayer extends Player {
   /**
    * Makes a move based on available columns.
    */
-  async move(availableColumns: number[]): Promise<number> {
+  async move(_board: Disk[][], availableColumns: number[]): Promise<number> {
     // Pick a random column.
     const randomIndex = Math.floor(Math.random() * availableColumns.length);
     const column = availableColumns[randomIndex];

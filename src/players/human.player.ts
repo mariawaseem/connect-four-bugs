@@ -1,7 +1,7 @@
 import { prompt } from 'inquirer';
 import { Player } from './player';
 import { config } from '../config';
-import { PlayerType, ColumnAnswer } from '../types';
+import { PlayerType, ColumnAnswer, Disk } from '../types';
 
 export class HumanPlayer extends Player {
   readonly type = PlayerType.Human;
@@ -10,7 +10,7 @@ export class HumanPlayer extends Player {
   /**
    * Makes a move based on available columns.
    */
-  async move(availableColumns: number[]): Promise<number> {
+  async move(_board: Disk[][], availableColumns: number[]): Promise<number> {
     // Prompt for a column number.
     const { column } = await prompt<ColumnAnswer>(
       config.columnNumberQuestion(availableColumns)

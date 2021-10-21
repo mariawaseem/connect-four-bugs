@@ -1,4 +1,4 @@
-import { PlayerType } from '../types';
+import { Disk, PlayerType } from '../types';
 
 /**
  * Base class for every Player to extend.
@@ -6,5 +6,5 @@ import { PlayerType } from '../types';
 export abstract class Player {
   abstract type: PlayerType;
   abstract name: string;
-  abstract move(availableColumns: number[]): Promise<number>;
+  abstract move(board: Disk[][], availableColumns: number[]): Promise<number>;
 }
