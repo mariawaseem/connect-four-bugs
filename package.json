@@ -4,7 +4,7 @@
   "description": "A game of Connect Four",
   "main": "build/src/index.js",
   "scripts": {
-    "start": "node build/src/index.js",
+    "start": "npm run build && node build/src/index.js",
     "dev": "ts-node-dev src/index.ts",
     "all": "npm run test && npm run dev ",
     "build": "tsc",
