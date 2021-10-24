@@ -5,32 +5,49 @@ import { config } from '../config';
 export class NotSoDumbAIPlayer extends Player {
   readonly type = PlayerType.AI;
   readonly name = 'Not-so-dumb AI';
+
+  // Properties registering previous moves.
   private moves: number[] = [];
+  private lastColumn: number = -1;
+  private lastRow: number = -1;
 
   /**
    * Makes a move based on available columns.
    */
   async move(board: Disk[][], availableColumns: number[]): Promise<number> {
+    // If the board is empty, reset registered moves.
+    const emptyBoard =
+      board.flat(2).filter(disk => disk === Disk.Empty).length >=
+      config.columns * config.rows - 1;
+
+    // Reset registered moves.
+    if (emptyBoard) {
+      this.moves = [];
+      this.lastColumn = -1;
+      this.lastRow = -1;
+    }
+
     // Generate a random column index.
     const randomIndex = Math.floor(Math.random() * availableColumns.length);
-
-    // Grab the last move.
-    const lastMove = this.moves[this.moves.length - 1];
 
     // Define `move` variable.
     let move: number;
 
     // Scenarios:
     // If this is the first move or the last chosen column is not available.
-    if (this.moves.length === 0 || !availableColumns.includes(lastMove)) {
+    if (
+      this.moves.length === 0 ||
+      !availableColumns.includes(this.lastColumn)
+    ) {
       // Pick a random column.
       move = availableColumns[randomIndex];
     }
-    // If there is at least 4 empty slots
-    else if (board[lastMove].filter(disk => disk === Disk.Empty).length > 3) {
+    // If the opponent has chosen a different column.
+    else if (board[this.lastColumn][this.lastRow + 1] === Disk.Empty) {
       // Pick the last picked column.
-      move = lastMove;
+      move = this.lastColumn;
     }
+    // If there is at least 4 empty slots
     // Handle every other scenario.
     else {
       // Pick a random column.
@@ -39,6 +56,8 @@ export class NotSoDumbAIPlayer extends Player {
 
     // Register the move.
     this.moves.push(move);
+    this.lastColumn = move;
+    this.lastRow = board[move].indexOf(Disk.Empty);
 
     return new Promise((resolve, _reject) =>
       setTimeout(() => resolve(move), config.aiMoveDelay)
