@@ -8,8 +8,8 @@ export class NotSoDumbAIPlayer extends Player {
 
   // Properties registering previous moves.
   private moves: number[] = [];
-  private lastColumn: number = -1;
-  private lastRow: number = -1;
+  private lastColumn = -1;
+  private lastRow = -1;
 
   /**
    * Makes a move based on available columns.
@@ -47,7 +47,6 @@ export class NotSoDumbAIPlayer extends Player {
       // Pick the last picked column.
       move = this.lastColumn;
     }
-    // If there is at least 4 empty slots
     // Handle every other scenario.
     else {
       // Pick a random column.
