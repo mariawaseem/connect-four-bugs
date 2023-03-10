@@ -2,9 +2,7 @@ import { config } from '../src/config';
 import { Disk } from '../src/types';
 import { game } from './jest.setup';
 
-/**
- * Test everything related to the game board.
- */
+/** Test everything related to the game board */
 describe('when creates a new, empty board', () => {
   it('board is 7x6', () => {
     // Test if the column dimensions are correct.
@@ -19,9 +17,7 @@ describe('when creates a new, empty board', () => {
     expect(isEmpty).toBe(true);
   });
 
-  /**
-   * Test for a winner horizontally.
-   */
+  /** Test for a winner horizontally */
   describe('and when a board has 4 red disks in a row horizontally', () => {
     it('detects a winner', () => {
       // Populate the board with 4 reds in a row.
@@ -35,9 +31,7 @@ describe('when creates a new, empty board', () => {
     });
   });
 
-  /**
-   * Test for a winner vertically.
-   */
+  /** Test for a winner vertically */
   describe('and when a board has 4 red disks in a row vertically', () => {
     it('detects a winner', () => {
       // Populate the board with 4 reds in a row.
@@ -51,9 +45,7 @@ describe('when creates a new, empty board', () => {
     });
   });
 
-  /**
-   * Test for a winner diagonally.
-   */
+  /** Test for a winner diagonally */
   describe('and when a board has 4 red disks in a row diagonally', () => {
     it('detects a winner', () => {
       // Populate the board with 4 reds in a row.
@@ -67,9 +59,7 @@ describe('when creates a new, empty board', () => {
     });
   });
 
-  /**
-   * Test if the picked column gets populated correctly.
-   */
+  /** Test if the picked column gets populated correctly */
   const pickedColumn = 5;
 
   describe(`and when a red disk is thrown into column ${pickedColumn}`, () => {
@@ -81,17 +71,13 @@ describe('when creates a new, empty board', () => {
     });
   });
 
-  /**
-   * Test the case when some columns are not available.
-   */
+  /** Test the case when some columns are not available */
   const columnsNotAvailable = [1, 5];
 
   describe(`and when columns ${columnsNotAvailable} are not available`, () => {
     it('correctly lists available columns', () => {
       game._board = game._board.map((column, columnIndex) =>
-        column.map(row =>
-          columnsNotAvailable.includes(columnIndex) ? Disk.Red : row
-        )
+        column.map(row => (columnsNotAvailable.includes(columnIndex) ? Disk.Red : row))
       );
 
       expect(game._listAvailableColumns(game._board).length).toEqual(

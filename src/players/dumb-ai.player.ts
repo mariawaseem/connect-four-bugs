@@ -6,9 +6,7 @@ export class DumbAIPlayer extends Player {
   readonly type = PlayerType.AI;
   readonly name = 'Dumb AI';
 
-  /**
-   * Makes a move based on available columns.
-   */
+  /** Makes a move based on available columns */
   async move(_board: Disk[][], availableColumns: number[]): Promise<number> {
     // Pick a random column.
     const randomIndex = Math.floor(Math.random() * availableColumns.length);

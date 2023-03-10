@@ -4,9 +4,7 @@ import { transpose } from '../utils';
 import { Disk } from '../types';
 
 export class ColorPrinter extends Printer {
-  /**
-   * Prints a start screen.
-   */
+  /** Prints a start screen */
   printStartScreen(playerRed: string, playerYellow: string): void {
     // Clear the console.
     console.clear();
@@ -25,9 +23,7 @@ export class ColorPrinter extends Printer {
     );
   }
 
-  /**
-   * Prints current state of the game board.
-   */
+  /** Prints current state of the game board */
   printBoard(board: Disk[][]): void {
     // Print a new line.
     console.log();
@@ -60,44 +56,29 @@ export class ColorPrinter extends Printer {
     console.log();
   }
 
-  /**
-   * Prints current player's turn.
-   */
+  /** Prints current player's turn */
   printCurrentTurn(playerName: string, disk: Disk): void {
     console.log(`${this.colorName(playerName, disk)} thinks...`);
   }
 
-  /**
-   * Prints available columns.
-   */
+  /** Prints available columns */
   printAvailableColumns(columns: number[]): void {
     console.log(`Available columns: ${columns.join(', ')}`);
   }
 
-  /**
-   * Prints columns picked by a player.
-   */
+  /** Prints columns picked by a player */
   printPickedColumn(playerName: string, disk: Disk, column: number): void {
     console.log(
-      `${this.colorName(
-        playerName,
-        disk
-      )} inserts the disk into column ${column}`
+      `${this.colorName(playerName, disk)} inserts the disk into column ${column}`
     );
   }
 
-  /**
-   * Prints the winner.
-   */
+  /** Prints the winner */
   printWinner(playerName: string, disk: Disk) {
-    console.log(
-      `Congratulations! ${this.colorName(playerName, disk)} is the winner!\n`
-    );
+    console.log(`Congratulations! ${this.colorName(playerName, disk)} is the winner!\n`);
   }
 
-  /**
-   * Applies a color to the player name string based on the provided disk.
-   */
+  /** Applies a color to the player name string based on the provided disk */
   private colorName(playerName: string, disk: Disk): string {
     return disk === Disk.Red ? chalk.red(playerName) : chalk.yellow(playerName);
   }

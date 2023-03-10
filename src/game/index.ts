@@ -8,36 +8,23 @@ import { Disk, GameOptions, Mode, PlayerType } from '../types';
  * Main Game class that holds the core logic of the game.
  */
 export class Game {
-  /**
-   * Game board.
-   */
+  /** Game board */
   protected board: Disk[][] = this.createBoard();
 
-  /**
-   * Current disk's turn. Initialized randomly as `Disk.Red` or `Disk.Yellow`.
-   */
-  protected turn: Disk.Red | Disk.Yellow =
-    Math.random() > 0.5 ? Disk.Red : Disk.Yellow;
+  /** Current disk's turn. Initialized randomly as `Disk.Red` or `Disk.Yellow` */
+  protected turn: Disk.Red | Disk.Yellow = Math.random() > 0.5 ? Disk.Red : Disk.Yellow;
 
-  /**
-   * Players. Initialized in the constructor based on the game mode.
-   */
+  /** Players. Initialized in the constructor based on the game mode */
   private playerRed: Player;
   private playerYellow: Player;
 
-  /**
-   * Printer used for logging game events.
-   */
+  /** Printer used for logging game events */
   private printer: Printer;
 
-  /**
-   * Winner. Initially `null`.
-   */
+  /** Winner. Initially `null` */
   private winner: Player | null = null;
 
-  /**
-   * Dynamically retrieves the current player based on the current turn.
-   */
+  /** Dynamically retrieves the current player based on the current turn */
   private get currentPlayer(): Player {
     return this.turn === Disk.Red ? this.playerRed : this.playerYellow;
   }
@@ -63,9 +50,7 @@ export class Game {
     }
   }
 
-  /**
-   * Starts the game.
-   */
+  /** Starts the game */
   async start(): Promise<void> {
     // Prompt for player names.
     await this.promptPlayerNames();
@@ -99,9 +84,7 @@ export class Game {
     } while (playAgain);
   }
 
-  /**
-   * Execute the turn.
-   */
+  /** Execute the turn */
   private async doTurn(): Promise<void> {
     // Check available columns
     const availableColumns = this.listAvailableColumns(this.board);
@@ -116,18 +99,11 @@ export class Game {
     // Make a move until it is valid.
     do {
       // Move depending on the turn.
-      pickedColumn = await this.currentPlayer.move(
-        this.board,
-        availableColumns
-      );
+      pickedColumn = await this.currentPlayer.move(this.board, availableColumns);
     } while (!this.isValidMove(pickedColumn, this.board));
 
     // Print the players choice.
-    this.printer.printPickedColumn(
-      this.currentPlayer.name,
-      this.turn,
-      pickedColumn
-    );
+    this.printer.printPickedColumn(this.currentPlayer.name, this.turn, pickedColumn);
 
     // Update the board.
     this.insertDisk(pickedColumn);
@@ -148,9 +124,7 @@ export class Game {
     }
   }
 
-  /**
-   * Resets the board and the winner.
-   */
+  /** Resets the board and the winner */
   private resetGame(): void {
     // Clear the console.
     console.clear();
@@ -162,9 +136,7 @@ export class Game {
     this.winner = null;
   }
 
-  /**
-   * Lists all available columns.
-   */
+  /** Lists all available columns */
   protected listAvailableColumns(board: Disk[][]): number[] {
     return board.reduce(
       (availableColumns, _column, columnIndex) =>
@@ -175,9 +147,7 @@ export class Game {
     );
   }
 
-  /**
-   * Inserts the disk into the board.
-   */
+  /** Inserts the disk into the board */
   protected insertDisk(column: number): void {
     // Find the index of the row to update.
     const row = this.board[column].findIndex(row => row === Disk.Empty);
@@ -186,9 +156,7 @@ export class Game {
     this.board[column][row] = this.turn;
   }
 
-  /**
-   * Checks if the chosen column is valid.
-   */
+  /** Checks if the chosen column is valid */
   private isValidMove(column: number, board: Disk[][]): boolean {
     // Check the if the number is in the column range.
     if (column < 0 || column >= config.columns) {
@@ -199,9 +167,7 @@ export class Game {
     }
   }
 
-  /**
-   * Prompts for player names.
-   */
+  /** Prompts for player names */
   private async promptPlayerNames(): Promise<void> {
     if (this.playerRed.type === PlayerType.Human) {
       this.playerRed.name = await getPlayerName(Disk.Red);
@@ -211,9 +177,7 @@ export class Game {
     }
   }
 
-  /**
-   * Creates a new board.
-   */
+  /** Creates a new board */
   protected createBoard(): Disk[][] {
     // Initialize a new board.
     const board: Disk[][] = [];
@@ -231,9 +195,7 @@ export class Game {
     return board;
   }
 
-  /**
-   * Checks if there is a winner.
-   */
+  /** Checks if there is a winner */
   protected checkWinner(board: Disk[][]): Disk {
     const width = board.length;
     const height = board[0].length;

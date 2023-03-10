@@ -49,9 +49,7 @@ export const game = new TestGame({
   printer: colorPrinter,
 });
 
-/**
- * Setup all the necessary actions before and after tests.
- */
+/** Setup all the necessary actions before and after tests */
 beforeEach(() => {
   // Reset the game board before every test.
   game._board = game._createBoard();

@@ -11,9 +11,7 @@ export class NotSoDumbAIPlayer extends Player {
   private lastColumn = -1;
   private lastRow = -1;
 
-  /**
-   * Makes a move based on available columns.
-   */
+  /** Makes a move based on available columns */
   async move(board: Disk[][], availableColumns: number[]): Promise<number> {
     // If the board is empty, reset registered moves.
     const emptyBoard =
@@ -35,10 +33,7 @@ export class NotSoDumbAIPlayer extends Player {
 
     // Scenarios:
     // If this is the first move or the last chosen column is not available.
-    if (
-      this.moves.length === 0 ||
-      !availableColumns.includes(this.lastColumn)
-    ) {
+    if (this.moves.length === 0 || !availableColumns.includes(this.lastColumn)) {
       // Pick a random column.
       move = availableColumns[randomIndex];
     }

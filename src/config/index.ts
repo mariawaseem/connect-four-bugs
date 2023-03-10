@@ -1,24 +1,16 @@
 import { DistinctQuestion } from 'inquirer';
 import { Disk, Mode, PlayAgain } from '../types';
 
-/**
- * Config class that contains all the game settings.
- */
+/** Config class that contains all the game settings */
 class Config {
-  /**
-   * Board size.
-   */
+  /** Board size */
   readonly columns = 7;
   readonly rows = 6;
 
-  /**
-   * AI move delay time in ms.
-   */
+  /** AI move delay time in ms */
   readonly aiMoveDelay = 1000;
 
-  /**
-   * CLI questions.
-   */
+  /** CLI questions */
   readonly gameModeQuestion: DistinctQuestion = {
     name: 'mode',
     type: 'list',
