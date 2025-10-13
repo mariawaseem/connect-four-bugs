@@ -73,12 +73,9 @@ export class Game {
 
       // Ask if the player wants to play again.
       playAgain = await askPlayAgain();
-
-      if (playAgain) {
-        // Reset the game.
-        this.resetGame();
-      } else {
-        // Clear the console.
+      
+      // Clear console if the player doesn't want to play again
+      if (!playAgain) {
         console.clear();
       }
     } while (playAgain);
