@@ -120,7 +120,7 @@ export class Game {
       this.winner = this.currentPlayer;
     } else {
       // Change turn.
-      this.turn = this.turn === Disk.Red ? Disk.Yellow : Disk.Red;
+      this.turn = this.turn === Disk.Red ? Disk.Red : Disk.Yellow;
     }
   }
 

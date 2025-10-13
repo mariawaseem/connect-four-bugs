@@ -31,3 +31,14 @@ To execute tests run:
 ```bash
 npm run test
 ```
+
+## !! Bug !!
+
+
+This fork contains an intentionally inserted bug.
+
+
+Expected behavior: The two players should take turns making moves.
+
+
+Buggy behavior: The players do not take turns and player 1 is continuously able to make moves.
