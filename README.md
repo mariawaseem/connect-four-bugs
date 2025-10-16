@@ -31,3 +31,11 @@ To execute tests run:
 ```bash
 npm run test
 ```
+
+## Note about bugs
+
+Make sure you check out the buggy branches before starting to debug:
+
+```bash
+git checkout BRANCH_NAME
+```
